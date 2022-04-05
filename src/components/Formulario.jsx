@@ -1,6 +1,8 @@
 import { useState } from "react";
+import useLetras from "../hooks/useLetras";
 
 function Formulario() {
+  const { setAlerta, busquedaLetra } = useLetras();
   const [busqueda, setBusqueda] = useState({
     artista: "",
     cancion: "",
@@ -10,8 +12,10 @@ function Formulario() {
     e.preventDefault();
 
     if (Object.values(busqueda).includes("")) {
-      return alert("Todos los campos son obligatorios");
+      setAlerta("Todos los campos son obligatorios");
+      return;
     }
+    busquedaLetra(busqueda);
   };
 
   return (
